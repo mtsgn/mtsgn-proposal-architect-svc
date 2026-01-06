@@ -1,0 +1,31 @@
+app_env: development
+
+server:
+  port: 8000
+
+jwt:
+  secret: "secret"
+  access_token_expiration_time: 3600
+  refresh_token_expiration_time: 86400
+
+mongodb:
+  host: 
+  port: 27017
+  user: 
+  password: 
+  db_name: 
+  ssl_mode: "disable"
+
+mysql:
+  host: 
+  port: 3306
+  user: 
+  password: 
+  db_name: "wjfh"
+  ssl_mode: "disable"
+
+redis:
+  host: 
+  port: 6379
+  password: 
+  number_channel_room: "3"

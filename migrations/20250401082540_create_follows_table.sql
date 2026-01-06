@@ -1,0 +1,16 @@
+-- +goose Up
+CREATE TABLE IF NOT EXISTS follows (
+    id CHAR(36) NOT NULL DEFAULT (UUID()),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL DEFAULT NULL,
+    follower_id CHAR(36) NOT NULL,
+    following_id CHAR(36) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY unique_follow (follower_id, following_id),
+    FOREIGN KEY (follower_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (following_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- +goose Down
+DROP TABLE IF EXISTS follows;

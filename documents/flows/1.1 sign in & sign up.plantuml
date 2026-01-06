@@ -1,0 +1,30 @@
+@startuml
+
+actor User
+participant "Front-End" as FE
+participant "Back-End" as BE
+database "Database" as DB
+
+== Sign-Up Flow ==
+User -> FE: Enter sign-up details
+FE -> BE: Send sign-up request
+BE -> BE: Validate input data
+BE -> BE: Hash password
+BE -> DB: Store user details
+BE -> FE: Send success response
+
+== Sign-In Flow ==
+User -> FE: Enter login credentials
+FE -> BE: Send sign-in request
+BE -> BE: Validate input data
+BE -> DB: Verify credentials
+BE -> BE: Generate tokens
+BE -> FE: Send tokens
+
+== Refresh Token Flow ==
+FE -> BE: Send refresh token
+BE -> BE: Validate refresh token
+BE -> BE: Generate new access token
+BE -> FE: Send new access token
+
+@enduml

@@ -1,0 +1,1780 @@
+basePath: /api/v1
+definitions:
+  constant.GenderValue:
+    enum:
+    - MALE
+    - FEMALE
+    type: string
+    x-enum-varnames:
+    - GenderMale
+    - GenderFemale
+  constant.InterestsType:
+    enum:
+    - relation_ship
+    - personality
+    - food
+    - game
+    - sport
+    - pet
+    - book_movie_music
+    type: string
+    x-enum-varnames:
+    - RelationShipInterestsType
+    - PersonalityInterestsType
+    - FoodInterestsType
+    - GameInterestsType
+    - SportInterestsType
+    - PetInterestsType
+    - BookMovieMusicInterestsType
+  constant.RoomMode:
+    enum:
+    - free
+    - multi_speakers
+    - two_speakers
+    - multi_speakers
+    type: string
+    x-enum-varnames:
+    - FreeRoomMode
+    - MultiSpeakerMode
+    - TwoSpeakerMode
+    - DefaultRoomMode
+  constant.StatusPostValue:
+    enum:
+    - PUBLIC
+    - PRIVATE
+    - FRIEND
+    type: string
+    x-enum-varnames:
+    - StatusPostPublic
+    - StatusPostPrivate
+    - StatusPostFriend
+  schemas.ChangeRoomModePayload:
+    properties:
+      hostID:
+        type: string
+      mode:
+        $ref: '#/definitions/constant.RoomMode'
+      roomID:
+        type: string
+    required:
+    - mode
+    type: object
+  schemas.Country:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      iso_code:
+        type: string
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  schemas.CountryDialCode:
+    properties:
+      country_id:
+        type: integer
+      created_at:
+        type: string
+      dial_code:
+        type: string
+      id:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  schemas.CreateCommentReq:
+    properties:
+      author_id:
+        type: string
+      content:
+        type: string
+      parent_id:
+        type: string
+      post_id:
+        type: string
+    type: object
+  schemas.CreatePostReq:
+    properties:
+      audio:
+        items:
+          type: string
+        type: array
+      author_id:
+        type: string
+      content:
+        type: string
+      friend_tag:
+        items:
+          type: string
+        type: array
+      images:
+        items:
+          type: string
+        type: array
+      location:
+        $ref: '#/definitions/schemas.Location'
+      status:
+        $ref: '#/definitions/constant.StatusPostValue'
+      topic_ids:
+        items:
+          type: string
+        type: array
+    required:
+    - content
+    - status
+    type: object
+  schemas.CreateProfileReq:
+    properties:
+      avatar:
+        type: string
+      birthday:
+        type: string
+      gender:
+        $ref: '#/definitions/constant.GenderValue'
+      interests:
+        items:
+          type: integer
+        type: array
+      nickname:
+        type: string
+      self_intro:
+        type: string
+      userID:
+        type: string
+      voice:
+        type: string
+    type: object
+  schemas.CreateTopicReq:
+    properties:
+      image:
+        type: string
+      title:
+        type: string
+    required:
+    - title
+    type: object
+  schemas.GetMe:
+    properties:
+      country:
+        $ref: '#/definitions/schemas.Country'
+      country_dial_code:
+        $ref: '#/definitions/schemas.CountryDialCode'
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      easemob_username:
+        type: string
+      easemob_uuid:
+        type: string
+      id:
+        type: string
+      last_login_at:
+        type: string
+      phone_number:
+        type: string
+      updated_at:
+        type: string
+      user_profile:
+        $ref: '#/definitions/schemas.GetProfileRes'
+    type: object
+  schemas.GetProfileRes:
+    properties:
+      avatar:
+        type: string
+      birthday:
+        type: string
+      count_comment:
+        type: integer
+      easemob_username:
+        type: string
+      easemob_uuid:
+        type: string
+      follower_count:
+        type: integer
+      following_count:
+        type: integer
+      gender:
+        $ref: '#/definitions/constant.GenderValue'
+      id:
+        type: string
+      interests:
+        items:
+          $ref: '#/definitions/schemas.GetUserInterestsRes'
+        type: array
+      is_following:
+        type: boolean
+      like_count:
+        type: integer
+      nickname:
+        type: string
+      self_intro:
+        type: string
+      user_id:
+        type: string
+      voice:
+        type: string
+    type: object
+  schemas.GetUserInterestsRes:
+    properties:
+      name:
+        type: string
+      type:
+        $ref: '#/definitions/constant.InterestsType'
+    type: object
+  schemas.Location:
+    properties:
+      display_name:
+        type: string
+      lat:
+        type: string
+      lng:
+        type: string
+      place_id:
+        type: string
+    type: object
+  schemas.NearbyItem:
+    properties:
+      post:
+        $ref: '#/definitions/schemas.NearbyPost'
+      user:
+        $ref: '#/definitions/schemas.NearbyUser'
+    type: object
+  schemas.NearbyPost:
+    properties:
+      audio:
+        items:
+          type: string
+        type: array
+      author_id:
+        type: string
+      comment_count:
+        type: integer
+      content:
+        type: string
+      created_at:
+        type: string
+      friend_tag:
+        items:
+          type: string
+        type: array
+      images:
+        items:
+          type: string
+        type: array
+      like_users:
+        items:
+          type: string
+        type: array
+      location:
+        $ref: '#/definitions/schemas.Location'
+      post_id:
+        type: string
+      status:
+        type: string
+      topic_ids:
+        items:
+          type: string
+        type: array
+      updated_at:
+        type: string
+    type: object
+  schemas.NearbyUser:
+    properties:
+      country:
+        $ref: '#/definitions/schemas.Country'
+      country_dial_code:
+        $ref: '#/definitions/schemas.CountryDialCode'
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      easemob_username:
+        type: string
+      easemob_uuid:
+        type: string
+      id:
+        type: string
+      last_login_at:
+        type: string
+      phone_number:
+        type: string
+      updated_at:
+        type: string
+      user_profile:
+        $ref: '#/definitions/schemas.UserProfile'
+    type: object
+  schemas.PairTokensResponse:
+    properties:
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+    type: object
+  schemas.RefreshTokenPayload:
+    properties:
+      refresh_token:
+        type: string
+    required:
+    - refresh_token
+    type: object
+  schemas.RegisterPayload:
+    properties:
+      dial_code:
+        type: string
+      password:
+        type: string
+      phone_number:
+        type: string
+    type: object
+  schemas.RegisterResponse:
+    properties:
+      country:
+        $ref: '#/definitions/schemas.Country'
+      country_dial_code:
+        $ref: '#/definitions/schemas.CountryDialCode'
+      created_at:
+        type: string
+      easemob_username:
+        type: string
+      easemob_uuid:
+        type: string
+      id:
+        type: string
+      last_login_at:
+        type: string
+      phone_number:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  schemas.Response:
+    properties:
+      data: {}
+      message:
+        type: string
+      meta: {}
+      status:
+        type: integer
+    type: object
+  schemas.SignInPayload:
+    properties:
+      dial_code:
+        type: string
+      password:
+        type: string
+      phone_number:
+        type: string
+    type: object
+  schemas.UpdateProfileReq:
+    properties:
+      avatar:
+        type: string
+      birthday:
+        type: string
+      gender:
+        $ref: '#/definitions/constant.GenderValue'
+      interests:
+        items:
+          type: integer
+        type: array
+      nickname:
+        type: string
+      self_intro:
+        type: string
+      userID:
+        type: string
+      voice:
+        type: string
+    type: object
+  schemas.UserProfile:
+    properties:
+      avatar:
+        type: string
+      birthday:
+        type: string
+      created_at:
+        type: string
+      follower_count:
+        type: integer
+      following_count:
+        type: integer
+      gender:
+        $ref: '#/definitions/constant.GenderValue'
+      id:
+        type: string
+      like_count:
+        type: integer
+      nickname:
+        type: string
+      self_intro:
+        type: string
+      updated_at:
+        type: string
+      voice:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: API server for boilerplate application
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: boilerplate API
+  version: "1.0"
+paths:
+  /api/v1/easemob/token:
+    get:
+      consumes:
+      - application/json
+      description: Returns a valid Easemob access token
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get Easemob access token
+      tags:
+      - easemob
+  /api/v1/nearby:
+    get:
+      consumes:
+      - application/json
+      description: Get list of posts from users who are in the same location as the
+        current user
+      parameters:
+      - default: 0
+        description: Offset for pagination
+        in: query
+        name: offset
+        type: integer
+      - default: 10
+        description: Number of items per page
+        in: query
+        name: limit
+        type: integer
+      - description: Gender of the user
+        example: MALE, FEMALE
+        in: query
+        name: gender
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully retrieved nearby posts
+          schema:
+            allOf:
+            - $ref: '#/definitions/schemas.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/schemas.NearbyItem'
+                  type: array
+                meta:
+                  type: object
+              type: object
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Get nearby posts
+      tags:
+      - nearby
+  /auth/me:
+    get:
+      consumes:
+      - application/json
+      description: Get user profile by user ID
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.GetMe'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      summary: Get user profile
+      tags:
+      - auth
+  /auth/refresh_token:
+    post:
+      consumes:
+      - application/json
+      description: Refresh token
+      parameters:
+      - description: Refresh token
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.RefreshTokenPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.PairTokensResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      summary: Refresh token
+      tags:
+      - auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register a new user with phone number and password. Also registers
+        the user with Easemob chat service.
+      parameters:
+      - description: Register credentials
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.RegisterPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.RegisterResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      summary: Register new user
+      tags:
+      - auth
+  /auth/sign_in:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate a user and return JWT tokens
+      parameters:
+      - description: Login credentials
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.SignInPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.PairTokensResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      summary: Sign in user
+      tags:
+      - auth
+  /follow/{following_user_id}/follow:
+    post:
+      consumes:
+      - application/json
+      description: Api will follow the user if user not follow the user, and unfollow
+        the user if user already follow the user
+      parameters:
+      - description: Following user ID
+        in: path
+        name: following_user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Handle follow/unfollow user
+      tags:
+      - follow
+  /interests:
+    get:
+      consumes:
+      - application/json
+      description: Get list of interests with pagination
+      parameters:
+      - default: 0
+        description: Offset for pagination
+        in: query
+        name: offset
+        type: integer
+      - default: 10
+        description: Limit for pagination
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      summary: Get list of interests
+      tags:
+      - interests
+  /media:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Upload media files (avatar or voice)
+      parameters:
+      - description: Media type (avatar or voice)
+        in: formData
+        name: type
+        required: true
+        type: string
+      - description: Media file to upload
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      summary: Upload media
+      tags:
+      - media
+  /posts:
+    get:
+      consumes:
+      - application/json
+      description: Get list of posts by author ID with pagination
+      parameters:
+      - description: Author ID
+        in: query
+        name: user_id
+        required: true
+        type: string
+      - default: 0
+        description: Offset for pagination
+        in: query
+        name: offset
+        type: integer
+      - default: 10
+        description: Limit for pagination
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      summary: List posts by author
+      tags:
+      - post
+    post:
+      consumes:
+      - application/json
+      description: Create a new post with optional images, friend tags, and topics
+      parameters:
+      - description: Create post request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.CreatePostReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Create post
+      tags:
+      - post
+  /posts/{post_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get post by ID
+      parameters:
+      - description: Post ID
+        in: query
+        name: post_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      summary: Get post by ID
+      tags:
+      - post
+  /posts/comments:
+    post:
+      consumes:
+      - application/json
+      description: Create a new comment for a post
+      parameters:
+      - description: Create comment request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.CreateCommentReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Create comment
+      tags:
+      - comment
+  /posts/comments/{post_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get list of comments by post ID with pagination
+      parameters:
+      - description: Post ID
+        in: path
+        name: post_id
+        required: true
+        type: string
+      - default: 0
+        description: Offset for pagination
+        in: query
+        name: offset
+        type: integer
+      - default: 10
+        description: Limit for pagination
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      summary: List comments by post ID
+      tags:
+      - comment
+  /posts/comments/parent/{parent_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get list of comments by parent ID with pagination
+      parameters:
+      - description: Parent ID
+        in: path
+        name: parent_id
+        required: true
+        type: string
+      - default: 0
+        description: Offset for pagination
+        in: query
+        name: offset
+        type: integer
+      - default: 10
+        description: Limit for pagination
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      summary: List comments by parent ID
+      tags:
+      - comment
+  /posts/like/{post_id}:
+    post:
+      consumes:
+      - application/json
+      description: Api will list posts based on filter_by option
+      parameters:
+      - default: followed
+        description: Filter by followed, latest, or recommended
+        in: query
+        name: filter_by
+        required: true
+        type: string
+      - default: 0
+        description: Offset for pagination
+        in: query
+        name: offset
+        type: integer
+      - default: 12
+        description: Limit for pagination
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Handle list posts
+      tags:
+      - post
+  /profile:
+    get:
+      consumes:
+      - application/json
+      description: Get profile by user ID
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Get profile
+      tags:
+      - profile
+    post:
+      consumes:
+      - application/json
+      description: Create a new user profile with optional interests
+      parameters:
+      - description: Create profile request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.CreateProfileReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Create profile
+      tags:
+      - profile
+    put:
+      consumes:
+      - application/json
+      description: Update profile by user ID
+      parameters:
+      - description: Update profile
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.UpdateProfileReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      summary: Update profile
+      tags:
+      - profile
+  /profile/{user_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get profile by user ID
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Get profile by user ID
+      tags:
+      - profile
+  /profile/friends/list:
+    get:
+      consumes:
+      - application/json
+      description: List friends
+      parameters:
+      - default: 0
+        description: Offset for pagination
+        in: query
+        name: offset
+        type: integer
+      - default: 12
+        description: Limit for pagination
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: List friends
+      tags:
+      - profile
+  /rooms:
+    get:
+      consumes:
+      - application/json
+      description: Get list room and returns the room ID
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Get list room
+      tags:
+      - rooms
+    post:
+      consumes:
+      - application/json
+      description: Create a new room and returns the room ID
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Create a room
+      tags:
+      - rooms
+  /rooms/{room_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a room and returns the room ID
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Delete a room
+      tags:
+      - rooms
+    put:
+      consumes:
+      - application/json
+      description: Update info room and returns the room ID
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Update info room
+      tags:
+      - rooms
+  /rooms/{room_id}/block:
+    post:
+      consumes:
+      - application/json
+      description: Block a user from the room using the room ID and user ID
+      parameters:
+      - description: room_id
+        in: path
+        name: room_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Block a user
+      tags:
+      - rooms
+  /rooms/{room_id}/invite:
+    post:
+      consumes:
+      - application/json
+      description: Invite to a room and returns the room ID
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Invite to a room
+      tags:
+      - rooms
+  /rooms/{room_id}/leave:
+    post:
+      consumes:
+      - application/json
+      description: Leave a room and returns the room ID
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Leave a room
+      tags:
+      - rooms
+  /rooms/{room_id}/mode:
+    put:
+      consumes:
+      - application/json
+      description: Change room mode and returns success if succeed
+      parameters:
+      - description: room_id
+        in: path
+        name: room_id
+        required: true
+        type: string
+      - description: mode
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.ChangeRoomModePayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Change room mode
+      tags:
+      - rooms
+  /rooms/{room_id}/publish:
+    post:
+      consumes:
+      - application/json
+      description: Publish a room as host
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Publish a room
+      tags:
+      - rooms
+  /rooms/{room_id}/unpublish:
+    post:
+      consumes:
+      - application/json
+      description: Unpublish a public room as host
+      parameters:
+      - description: Room ID to unpublish
+        in: path
+        name: room_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Unpublish a public room
+      tags:
+      - rooms
+  /rooms/{room_id}/viewer_talk_request:
+    post:
+      consumes:
+      - application/json
+      description: Send a talk request to the host
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Send a talk request to the host
+      tags:
+      - rooms
+  /rooms/{room_id}/viewer_talk_requests:
+    get:
+      consumes:
+      - application/json
+      description: List viewer talk requests as a host
+      parameters:
+      - description: room_id
+        in: path
+        name: room_id
+        required: true
+        type: string
+      - description: offset, default is 0
+        in: query
+        name: offset
+        type: integer
+      - description: limit, default is 10
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: List viewer talk requests
+      tags:
+      - rooms
+  /rooms/{room_id}/viewers:
+    get:
+      consumes:
+      - application/json
+      description: List room viewers and returns the list of viewers
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: List room viewers
+      tags:
+      - rooms
+  /rooms/blacklist:
+    get:
+      consumes:
+      - application/json
+      description: List blocked users and returns the list of banned users
+      parameters:
+      - default: 0
+        description: offset
+        in: query
+        name: offset
+        type: integer
+      - default: 10
+        description: limit
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: List blocked users
+      tags:
+      - rooms
+  /rooms/categories/all:
+    get:
+      consumes:
+      - application/json
+      description: List all room categories
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: List all room categories
+      tags:
+      - rooms
+  /rooms/categories/publish:
+    get:
+      consumes:
+      - application/json
+      description: List room categories for when user/host try to publish a room
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: List room categories
+      tags:
+      - rooms
+  /rooms/invited:
+    get:
+      consumes:
+      - application/json
+      description: List invited rooms by ID
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: List invited rooms by ID
+      tags:
+      - rooms
+  /rooms/unblock/{blacklist_id}:
+    post:
+      consumes:
+      - application/json
+      description: Unblock a user from the room's blacklist using the blacklist ID
+      parameters:
+      - description: Blacklist ID
+        in: path
+        name: blacklist_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Unblock a user
+      tags:
+      - rooms
+  /topics:
+    get:
+      consumes:
+      - application/json
+      description: Get list of topics with optional search and pagination
+      parameters:
+      - description: Search keyword
+        in: query
+        name: keyword
+        type: string
+      - default: 0
+        description: Offset for pagination
+        in: query
+        name: offset
+        type: integer
+      - default: 10
+        description: Limit for pagination
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      summary: Get list of topics
+      tags:
+      - topic
+    post:
+      consumes:
+      - application/json
+      description: Create a new topic
+      parameters:
+      - description: Create topic request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.CreateTopicReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Create topic
+      tags:
+      - topic
+  /topics/{topic_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get topic by ID
+      parameters:
+      - description: Topic ID
+        in: path
+        name: topic_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.Response'
+      security:
+      - Bearer: []
+      summary: Get topic by ID
+      tags:
+      - topic
+securityDefinitions:
+  Bearer:
+    description: RoomType "Bearer" followed by a space and JWT token.
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

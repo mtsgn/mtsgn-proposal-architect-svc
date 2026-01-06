@@ -1,0 +1,54 @@
+{"level":"info","timestamp":"2025-06-20T15:33:06.296389+07:00","message":"current log level: debug"}
+{"level":"info","timestamp":"2025-06-20T15:33:06.495734+07:00","message":"MYSQL database connected successfully"}
+{"level":"info","timestamp":"2025-06-20T15:33:06.496722+07:00","message":"MongoDB database connected successfully"}
+{"level":"info","timestamp":"2025-06-20T15:33:06.583347+07:00","message":"Redis database connected successfully"}
+{"level":"info","timestamp":"2025-06-20T15:33:06.583584+07:00","message":"Minio database connected successfully"}
+{"level":"info","port":"8080","commit_id":"","pid":8755,"timestamp":"2025-06-20T15:33:06.583619+07:00","message":"boilerplate-api START"}
+{"level":"info","timestamp":"2025-06-20T15:33:06.98287+07:00","message":"Subscriber started, listening on channel_0"}
+{"level":"info","timestamp":"2025-06-20T15:33:06.982877+07:00","message":"Distributor started, listening on general"}
+{"level":"info","timestamp":"2025-06-20T15:33:06.982886+07:00","message":"Subscriber started, listening on channel_2"}
+{"level":"info","timestamp":"2025-06-20T15:33:06.983059+07:00","message":"Subscriber started, listening on channel_1"}
+{"level":"info","timestamp":"2025-06-20T15:35:48.415282+07:00","message":"current log level: debug"}
+{"level":"info","timestamp":"2025-06-20T15:35:48.622787+07:00","message":"MYSQL database connected successfully"}
+{"level":"info","timestamp":"2025-06-20T15:35:48.623902+07:00","message":"MongoDB database connected successfully"}
+{"level":"info","timestamp":"2025-06-20T15:35:48.718619+07:00","message":"Redis database connected successfully"}
+{"level":"info","timestamp":"2025-06-20T15:35:48.718916+07:00","message":"Minio database connected successfully"}
+{"level":"info","port":"8000","commit_id":"","pid":8931,"timestamp":"2025-06-20T15:35:48.718946+07:00","message":"boilerplate-api START"}
+{"level":"info","timestamp":"2025-06-20T15:35:49.124284+07:00","message":"Subscriber started, listening on channel_2"}
+{"level":"info","timestamp":"2025-06-20T15:35:49.126504+07:00","message":"Subscriber started, listening on channel_0"}
+{"level":"info","timestamp":"2025-06-20T15:35:49.126621+07:00","message":"Subscriber started, listening on channel_1"}
+{"level":"info","timestamp":"2025-06-20T15:35:49.126909+07:00","message":"Distributor started, listening on general"}
+{"level":"info","request_id":"3fe9503c-21b1-444d-a03d-1720f8422702","phone_number":"936728938","timestamp":"2025-06-20T15:36:06.531015+07:00","message":"user signed in"}
+{"level":"debug","timestamp":"2025-06-20T15:36:06.531206+07:00","message":"user_context not exist"}
+{"level":"info","request_id":"3fe9503c-21b1-444d-a03d-1720f8422702","method":"POST","path":"/api/v1/auth/sign_in","status":200,"duration":220.593875,"timestamp":"2025-06-20T15:36:06.531243+07:00","message":"request processed"}
+{"level":"info","request_id":"88f1d2ef-442a-4e83-9029-78de7e162ed2","user_id":"cd2c268d-2fd7-11f0-88fc-fac742005500","method":"GET","path":"/api/v1/ws/Tw3n5C","status":200,"duration":2365.749791,"timestamp":"2025-06-20T15:36:20.559861+07:00","message":"request processed"}
+{"level":"debug","room_id":"Tw3n5C","user_id":"cd2c268d-2fd7-11f0-88fc-fac742005500","timestamp":"2025-06-20T15:36:21.183914+07:00","message":"user joined room successfully"}
+{"level":"debug","error":"redis: nil","key":"user:cd2c268d-2fd7-11f0-88fc-fac742005500","timestamp":"2025-06-20T15:36:21.267323+07:00","message":"failed to get user from cache"}
+{"level":"info","timestamp":"2025-06-20T18:30:29.510548+07:00","message":"current log level: debug"}
+{"level":"info","timestamp":"2025-06-20T18:30:29.975989+07:00","message":"MYSQL database connected successfully"}
+{"level":"info","timestamp":"2025-06-20T18:30:29.977801+07:00","message":"MongoDB database connected successfully"}
+{"level":"info","timestamp":"2025-06-20T18:30:30.180891+07:00","message":"Redis database connected successfully"}
+{"level":"info","timestamp":"2025-06-20T18:30:30.181266+07:00","message":"Minio database connected successfully"}
+{"level":"info","port":"8000","commit_id":"","pid":13872,"timestamp":"2025-06-20T18:30:30.181323+07:00","message":"boilerplate-api START"}
+{"level":"info","timestamp":"2025-06-20T18:30:31.124973+07:00","message":"Subscriber started, listening on channel_2"}
+{"level":"info","timestamp":"2025-06-20T18:30:31.124984+07:00","message":"Subscriber started, listening on channel_0"}
+{"level":"info","timestamp":"2025-06-20T18:30:31.131485+07:00","message":"Distributor started, listening on general"}
+{"level":"info","timestamp":"2025-06-20T18:30:31.136552+07:00","message":"Subscriber started, listening on channel_1"}
+{"level":"info","timestamp":"2025-06-25T16:11:37.290565+07:00","message":"current log level: debug"}
+{"level":"info","timestamp":"2025-06-25T16:11:42.238552+07:00","message":"MYSQL database connected successfully"}
+{"level":"info","timestamp":"2025-06-25T16:11:42.240311+07:00","message":"MongoDB database connected successfully"}
+{"level":"info","timestamp":"2025-06-25T16:11:42.345219+07:00","message":"Redis database connected successfully"}
+{"level":"info","timestamp":"2025-06-25T16:11:42.345517+07:00","message":"Minio database connected successfully"}
+{"level":"info","port":"8000","commit_id":"","pid":71830,"timestamp":"2025-06-25T16:11:42.34557+07:00","message":"boilerplate-api START"}
+{"level":"info","timestamp":"2025-06-25T16:11:42.78264+07:00","message":"Subscriber started, listening on channel_2"}
+{"level":"info","timestamp":"2025-06-25T16:11:42.782695+07:00","message":"Subscriber started, listening on channel_1"}
+{"level":"info","timestamp":"2025-06-25T16:11:42.784489+07:00","message":"Subscriber started, listening on channel_0"}
+{"level":"info","timestamp":"2025-06-27T18:01:15.955784+07:00","message":"current log level: debug"}
+{"level":"info","timestamp":"2025-06-27T18:01:16.409969+07:00","message":"MYSQL database connected successfully"}
+{"level":"info","timestamp":"2025-06-27T18:01:16.412056+07:00","message":"MongoDB database connected successfully"}
+{"level":"info","timestamp":"2025-06-27T18:01:16.507243+07:00","message":"Redis database connected successfully"}
+{"level":"info","timestamp":"2025-06-27T18:01:16.507563+07:00","message":"Minio database connected successfully"}
+{"level":"info","port":"8000","commit_id":"","pid":35196,"timestamp":"2025-06-27T18:01:16.507602+07:00","message":"boilerplate-api START"}
+{"level":"info","timestamp":"2025-06-27T18:01:16.914867+07:00","message":"Subscriber started, listening on channel_0"}
+{"level":"info","timestamp":"2025-06-27T18:01:16.9204+07:00","message":"Subscriber started, listening on channel_2"}
+{"level":"info","timestamp":"2025-06-27T18:01:16.920415+07:00","message":"Subscriber started, listening on channel_1"}

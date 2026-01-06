@@ -1,0 +1,40 @@
+@startuml
+
+actor "Device 2" as Device2
+actor "Device 1" as Device1
+participant "Front-End" as FE
+participant "Back-End" as BE
+database "Database" as DB
+
+== Check Active Device Flow ==
+Device1 -> FE: Access new screen
+FE -> BE: /api/v1/device/checking-active with device_id
+BE -> DB: Retrieve latest_device_id
+alt device_id = latest_device_id
+    BE -> FE: Keep session active
+else
+    BE -> FE: Decline session
+    FE -> Device1: Force logout
+end
+
+== Check Active Multiple Devices Flow ==
+Device1 -> FE: Login
+FE -> BE: /api/v1/auth/login
+BE -> DB: Set latest_device_id = device_1.id
+BE -> FE: Send success response
+FE -> Device1: Send success response
+
+Device2 -> FE: Login
+FE -> BE: /api/v1/auth/login
+BE -> DB: Set latest_device_id = device_2.id
+BE -> FE: Send success response
+FE -> Device2: Send success response
+
+Device1 -> FE: Access new screen
+FE -> BE: /api/v1/device/checking-active with device_id
+BE -> DB: Retrieve latest_device_id
+BE -> BE: Compare device_id with latest_device_id
+BE -> FE: Decline session
+FE -> Device1: Force logout
+
+@enduml
