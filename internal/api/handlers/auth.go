@@ -171,9 +171,13 @@ func (h *AuthHandler) GetMe(c *gin.Context) {
 		return
 	}
 	profile, err := h.profileService.GetProfileByUserID(userCtx.UserID)
+	var profileSchema schemas.GetProfileRes
 	if err != nil {
 		//log.Println("Fail get profile of user")
 		logs.Warn().Err(err).Msg("failed to get user's profile")
+		profileSchema = schemas.GetProfileRes{}
+	} else {
+		profileSchema = h.profileService.ToSchema(profile)
 	}
 
 	c.JSON(http.StatusOK, schemas.GetMe{
@@ -184,7 +188,7 @@ func (h *AuthHandler) GetMe(c *gin.Context) {
 		PhoneNumber:     user.PhoneNumber,
 		CountryDialCode: user.CountryDialCode.ToSchema(),
 		Country:         user.Country.ToSchema(),
-		UserProfile:     profile.ToSchema(),
+		UserProfile:     profileSchema,
 		EasemobUsername: user.EasemobUsername,
 		EasemobUUID:     user.EasemobUUID,
 	})

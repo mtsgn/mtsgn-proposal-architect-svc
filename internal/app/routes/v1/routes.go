@@ -14,13 +14,16 @@ func SetupV1APIRoutes(router *gin.RouterGroup, ctx *context.AppContext) {
 
 	//--------------------- init repositories ---------------------//
 	userRepo := repositories.NewUserRepository(ctx)
+	commonRepo := repositories.NewCommonRepository(ctx)
+	profileRepo := repositories.NewProfileRepository(ctx)
 
 	//----------------------- init services --------------------- //
 	userService := services.NewUserService(ctx.Redis, userRepo)
+	profileService := services.NewProfileService(profileRepo)
 	authService := services.NewAuthService(commonRepo, userRepo, profileRepo, ctx)
 
 	// ------------------ init clients --------------------- //
-	easemobClient := easemob.NewClient(ctx.Cfg.Easemob)
+	_ = easemob.NewClient(ctx.Cfg.Easemob)
 
 	authHandler := handlers.NewAuthHandler(
 		authService,

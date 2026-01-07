@@ -22,6 +22,7 @@ type Config struct {
 	Redis   RedisConfig
 	MongoDB DatabaseConfig
 	MySQL   DatabaseConfig
+	Easemob EasemobConfig `mapstructure:"easemob"`
 }
 
 //type Logger struct {
@@ -63,6 +64,13 @@ type RedisConfig struct {
 	Port              int    `mapstructure:"port"`
 	Password          string `mapstructure:"password"`
 	NumberChannelRoom int    `mapstructure:"number_channel_room"`
+}
+
+type EasemobConfig struct {
+	BaseURL      string `mapstructure:"base_url"`
+	AppKey       string `mapstructure:"app_key"`
+	ClientID     string `mapstructure:"client_id"`
+	ClientSecret string `mapstructure:"client_secret"`
 }
 
 func LoadConfig(path string) (*Config, error) {
